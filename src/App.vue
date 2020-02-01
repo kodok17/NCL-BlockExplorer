@@ -11,17 +11,17 @@ export default {
       let type=this.$route.query.type;
         if(type) {
           type=type.toLowerCase()
-          if(type=='hebe'){
-              this.$store.state.api='http://39.104.107.100/nxt?'
-              this.$store.state.apiText="HEBE"
+          if(type=='ncl'){
+              this.$store.state.api='http://34.68.197.65:9801/nxt?'
+              this.$store.state.apiText="NCL"
           }
           if(type=='nxt'){
               this.$store.state.api='http://nxterchina.org/nxt?'
               this.$store.state.apiText="NXT"
           }
-          if(type=='dira'){
-              this.$store.state.api='http://18.219.204.147:3787/nxt?'
-              this.$store.state.apiText="DIRA"
+          if(type=='range'){
+              this.$store.state.api='http://34.68.197.65:8284/nxt?'
+              this.$store.state.apiText="RNG"
           }
           if(type=='apl'){
               this.$store.state.api='https://apollowallet.org/apl?'
