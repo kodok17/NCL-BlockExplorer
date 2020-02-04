@@ -3,8 +3,8 @@
         <fhead></fhead>
         <el-main >
             <el-breadcrumb class="center" separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>账号地址</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+                <el-breadcrumb-item>Account address</el-breadcrumb-item>
             </el-breadcrumb>
             <el-card  v-loading="loading" class="box-card center" style="margin-top: 16px">
                 <div slot="header" class="clearfix">
@@ -12,74 +12,74 @@
                 </div>
 
                 <el-form  size="mini"  label-width="100px" >
-                    <el-form-item label="账号id">
+                    <el-form-item label="Account id">
                         {{accounts.account}}
                     </el-form-item>
-                    <el-form-item v-if="accounts.name" label="账号名">
+                    <el-form-item v-if="accounts.name" label="account name">
                         {{accounts.name}}
                     </el-form-item>
-                    <el-form-item label="账号地址">
+                    <el-form-item label="Account address">
                         {{accounts.accountRS}}
                     </el-form-item>
-                    <el-form-item label="账号公钥">
+                    <el-form-item label="Account public key">
                         {{accounts.publicKey}}
                     </el-form-item>
-                    <el-form-item label="账号余额">
+                    <el-form-item label="Account balance">
                         {{$g.wallet.amount(accounts.balanceNQT)}}
                     </el-form-item>
-                    <el-form-item label="锻造数量">
+                    <el-form-item label="Forging quantity">
                         {{$g.wallet.amount(lessorsSum)}}
                     </el-form-item>
-                    <el-form-item label="锻造收益">
+                    <el-form-item label="Forging revenue">
                         {{$g.wallet.amount(accounts.forgedBalanceNQT)}}
                     </el-form-item>
-                    <el-form-item v-if="accounts.description&&accounts.description!=''" label="账号描述">
+                    <el-form-item v-if="accounts.description&&accounts.description!=''" label="Account description">
                         {{accounts.description}}
                     </el-form-item>
                 </el-form>
 
                 <el-collapse v-model="activeNames" @change="handleChange">
-                    <el-collapse-item v-if="accounts.currentLesseeRS" title="出租信息" name="1">
+                    <el-collapse-item v-if="accounts.currentLesseeRS" title="Rental Information" name="1">
                         <el-form :inline="true" class="demo-form-inline">
-                            <el-form-item style="margin-bottom: 0" label="承租人账号id">
+                            <el-form-item style="margin-bottom: 0" label="Tenant account id">
                                 {{accounts.currentLessee}}
                             </el-form-item>
-                            <el-form-item style="margin-bottom: 0" label="承租人账号地址">
+                            <el-form-item style="margin-bottom: 0" label="Tenant account address">
                                 <router-link :to="'/account/'+accounts.currentLesseeRS">
                                     <el-button type="text"> {{accounts.currentLesseeRS}}</el-button>
                                 </router-link>
                             </el-form-item>
                         </el-form>
                         <el-form :inline="true" class="demo-form-inline">
-                            <el-form-item label="出租高度">
+                            <el-form-item label="Rental height">
                                 <router-link :to="'/block/'+accounts.currentLeasingHeightFrom">
                                     <el-button type="text"> {{accounts.currentLeasingHeightFrom}}</el-button>
                                 </router-link>
                             </el-form-item>
-                            <el-form-item label="到期高度">
+                            <el-form-item label="Expiration height">
                                 {{accounts.currentLeasingHeightTo}}
                             </el-form-item>
                         </el-form>
                         <el-form v-show="accounts.nextLessee" :inline="true" class="demo-form-inline">
-                            <el-form-item style="margin-bottom: 0" label="下一个承租人账号id">
+                            <el-form-item style="margin-bottom: 0" label="Next tenant account id">
                                 {{accounts.nextLessee}}
                             </el-form-item>
-                            <el-form-item style="margin-bottom: 0" label="下一个承租人账号地址">
+                            <el-form-item style="margin-bottom: 0" label="Address of the next tenant account">
                                 <router-link :to="'/account/'+accounts.nextLesseeRS">
                                     <el-button type="text"> {{accounts.nextLesseeRS}}</el-button>
                                 </router-link>
                             </el-form-item>
                         </el-form>
                         <el-form v-show="accounts.nextLessee" :inline="true" class="demo-form-inline">
-                            <el-form-item label="下一个出租高度">
+                            <el-form-item label="Next rental height">
                                 {{accounts.nextLeasingHeightFrom}}
                             </el-form-item>
-                            <el-form-item label="下一个到期高度">
+                            <el-form-item label="Next expiration height">
                                 {{accounts.nextLeasingHeightTo}}
                             </el-form-item>
                         </el-form>
                     </el-collapse-item>
-                    <el-collapse-item title="交易信息列表" name="2">
+                    <el-collapse-item title="Transaction information list" name="2">
                         <el-table v-loading="transactionsing" :data="transactions" border style="width: 100%">
                             <el-table-column
                                     label="id"
@@ -89,60 +89,60 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="发送地址"
+                                    label="sending address"
                                     width="280">
                                 <template slot-scope="scope">
                                     <router-link v-if="scope.row.senderRS!=account" :to="'/account/'+scope.row.senderRS">
                                         <el-button type="text"> {{scope.row.senderRS}}</el-button>
                                     </router-link>
                                     <div v-if="scope.row.senderRS==account">
-                                       本账号
+                                       This account
                                     </div>
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="接收地址"
+                                    label="receiving address"
                                     width="280">
                                 <template slot-scope="scope">
                                     <router-link v-if="scope.row.recipientRS!=account" :to="'/account/'+scope.row.recipientRS">
                                         <el-button type="text"> {{scope.row.recipientRS}}</el-button>
                                     </router-link>
                                     <div v-if="scope.row.recipientRS==account">
-                                        本账号
+                                        This account
                                     </div>
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="数量"
+                                    label="Quantity"
                                     width="180">
                                 <template slot-scope="scope">
                                     {{$g.wallet.amount(scope.row.amountNQT)}}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="手续费"
+                                    label="Handling fee"
                                     width="180">
                                 <template slot-scope="scope">
                                     {{$g.wallet.amount(scope.row.feeNQT)}}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="时间"
+                                    label="time"
                                     width="180">
                                 <template slot-scope="scope">
                                     {{$g.wallet.formatDateTime(scope.row.timestamp*1000+($store.state.epochBeginning-500))}}
                                 </template>
                             </el-table-column>
                         </el-table>
-                        <el-button v-show="currentPageIs" @click="add" type="text">再加载15条信息</el-button>
+                        <el-button v-show="currentPageIs" @click="add" type="text">Load 15 more messages</el-button>
                     </el-collapse-item>
-                    <el-collapse-item v-show="lessors.length!=0" :title="'出组人列表（'+lessors.length+'人）'" name="3">
+                    <el-collapse-item v-show="lessors.length!=0" :title="'Group list（'+lessors.length+'人）'" name="3">
                         <el-table
                                 :data="lessors"
                                 border
                                 style="width: 460px">
                             <el-table-column
-                                    label="出租地址"
+                                    label="Rental address"
                                     width="280">
                                 <template slot-scope="scope">
                                     <router-link :to="'/account/'+scope.row.lessorRS">
@@ -151,7 +151,7 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="出租数量">
+                                    label="Number of leases">
                                 <template slot-scope="scope">
                                     {{$g.wallet.amount(scope.row.guaranteedBalanceNQT)}}
                                 </template>
@@ -163,7 +163,7 @@
         </el-main>
         <el-footer class="footer">
             COPYRIGHT © 2018. ALL RIGHTS RESERVED. DESIGNED BY
-            <a target="_blank" href="https://hebeblock.com/">HEBEBLOCK</a>
+            <a target="_blank" href="https://hebeblock.com/">NUCLEARPLATFORM</a>
         </el-footer>
     </el-container>
 </template>
@@ -214,9 +214,9 @@
                     '&firstIndex='+(this.currentPage-1)*14+'&lastIndex='+((this.currentPage-1)*14+14),
                 }).then(response => {
                     if(response.errorCode){
-                        this.$alert('账号地址错误', '提示', {
+                        this.$alert('Account address error', 'prompt', {
                             confirmButtonText: '确定',
-                        });
+                        });determine
                     }else{
                         this.transactions=this.transactions.concat(response.transactions);
                         if(response.transactions.length!=15){
@@ -234,8 +234,8 @@
                     url: 'requestType=getAccountLessors&account='+this.account,
                 }).then(response => {
                     if(response.errorCode){
-                        this.$alert('账号地址错误', '提示', {
-                            confirmButtonText: '确定',
+                        this.$alert('Account address error', 'prompt', {
+                            confirmButtonText: 'determine',
                         });
                     }
                     else{
@@ -262,8 +262,8 @@
                     url: 'requestType=getAccount&account='+this.account,
                 }).then(response => {
                     if(response.errorCode){
-                        this.$alert('账号地址错误', '提示', {
-                            confirmButtonText: '确定',
+                        this.$alert('Account address error', 'prompt', {
+                            confirmButtonText: 'determine',
                         });
                     }
                     else{

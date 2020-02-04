@@ -5,27 +5,27 @@
               <el-col :span="24">
                   <router-link to="/">
                      <img class="img" src="./../assets/logo2.png"/>
-                     <div class="logoTxt">Hebe Explorer</div>
+                     <div class="logoTxt">Ncl Explorer</div>
                   </router-link>
                   <el-dropdown class="el_dropdown" @command="handleCommand">
                       <span class="el-dropdown-link">
-                        {{$store.state.apiText}}区块浏览器<i class="el-icon-arrow-down el-icon--right"></i>
+                        {{$store.state.apiText}}Block Browser<i class="el-icon-arrow-down el-icon--right"></i>
                       </span>
                       <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item command="blocks">区块</el-dropdown-item>
-                          <el-dropdown-item command="peers">节点</el-dropdown-item>
-                          <el-dropdown-item command="generators">锻造池</el-dropdown-item>
-                          <a target="_blank" href="/#/?type=HEBE">
-                              <el-dropdown-item divided>HEBE 区块浏览器
-                          </el-dropdown-item></a>
+                          <el-dropdown-item command="blocks">Block</el-dropdown-item>
+                          <el-dropdown-item command="peers">node</el-dropdown-item>
+                          <el-dropdown-item command="generators">Forging pool</el-dropdown-item>
+                          <a target="_blank" href="/#/?type=NCL">
+                              <el-dropdown-item divided>NCL Block Browser</el-dropdown-item>
+                              </a>
                           <a target="_blank" href="/#/?type=NXT">
-                              <el-dropdown-item>NXT 区块浏览器</el-dropdown-item>
+                              <el-dropdown-item>NXT Block Browser</el-dropdown-item>
                           </a>
-                          <a target="_blank" href="/#/?type=DIRA">
-                              <el-dropdown-item>DIRA 区块浏览器</el-dropdown-item>
+                          <a target="_blank" href="/#/?type=RNG">
+                              <el-dropdown-item>RNG Block Browser</el-dropdown-item>
                           </a>
                           <a target="_blank" href="/#/?type=APL">
-                              <el-dropdown-item>APL 区块浏览器</el-dropdown-item>
+                              <el-dropdown-item>APL Block Browser</el-dropdown-item>
                           </a>
                       </el-dropdown-menu>
                   </el-dropdown>
@@ -51,9 +51,9 @@
                 }
             },
             search(){
-                this.$prompt('请输入账号地址/区块高度', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                this.$prompt('Please enter account address / block height ',' Prompt ', {
+                    confirmButtonText: 'determine',
+                    cancelButtonText: 'cancel',
                 }).then(({ value }) => {
                     if(value.indexOf('-')!=-1){
                         this.$router.replace('/account/'+value);

@@ -15,39 +15,39 @@
                 </div>
 
                 <el-form  size="mini"  label-width="100px" >
-                    <el-form-item label="区块id">
+                    <el-form-item label="Blockid">
                         {{Blocks.block}}
                     </el-form-item>
-                    <el-form-item label="区块高度">
+                    <el-form-item label="Block height">
                         {{Blocks.height}}
                     </el-form-item>
-                    <el-form-item label="区块时间">
+                    <el-form-item label="Block time">
                         {{$g.wallet.formatDateTime(Blocks.timestamp*1000+($store.state.epochBeginning-500))}}
                     </el-form-item>
-                    <el-form-item label="区块锻造者">
+                    <el-form-item label="Block forge">
                         <router-link :to="'/account/'+Blocks.generatorRS">
                             <el-button style="font-size: 14px" type="text"> {{Blocks.generatorRS}}</el-button>
                         </router-link>
                     </el-form-item>
-                    <el-form-item label="区块交易数">
+                    <el-form-item label="Number of block transactions">
                         {{Blocks.transactions.length}}
                     </el-form-item>
-                    <el-form-item label="总转账数量">
+                    <el-form-item label="Total transfers">
                         {{$g.wallet.amount(Blocks.totalAmountNQT)}}
                     </el-form-item>
-                    <el-form-item label="区块交易费">
+                    <el-form-item label="Block transaction fee">
                         {{$g.wallet.amount(Blocks.totalFeeNQT)}}
                     </el-form-item>
                 </el-form>
 
                 <el-collapse v-model="activeNames">
-                    <el-collapse-item title="交易信息列表" name="1">
+                    <el-collapse-item title="Transaction information list" name="1">
                         <el-table
                                 :data="Blocks.transactions"
                                 border
                                 style="width: 100%">
                             <el-table-column
-                                    label="发送地址"
+                                    label="sending address"
                                     width="280">
                                 <template slot-scope="scope">
                                     <router-link :to="'/account/'+scope.row.senderRS">
@@ -56,7 +56,7 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="接收地址"
+                                    label="receiving address"
                                     width="280">
                                 <template slot-scope="scope">
                                     <router-link :to="'/account/'+scope.row.recipientRS">
@@ -65,14 +65,14 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="数量"
+                                    label="Quantity"
                                     width="180">
                                 <template slot-scope="scope">
                                     {{$g.wallet.amount(scope.row.amountNQT)}}
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    label="手续费"
+                                    label="Handling fee"
                                     width="180">
                                 <template slot-scope="scope">
                                     {{$g.wallet.amount(scope.row.feeNQT)}}
@@ -135,8 +135,8 @@
                 })
                     .then(response => {
                     if(response.errorCode){
-                        this.$alert('高度错误', '提示', {
-                            confirmButtonText: '确定',
+                        this.$alert('Height error', 'prompt', {
+                            confirmButtonText: 'determine',
                             callback: action => {
                                 this.$router.replace('/blocks');
                             }

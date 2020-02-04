@@ -4,11 +4,11 @@
         <el-main >
             <el-breadcrumb class="center" separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>所有区块</el-breadcrumb-item>
+                <el-breadcrumb-item>All blocks</el-breadcrumb-item>
             </el-breadcrumb>
             <el-card class="box-card center" style="margin-top: 16px">
                 <div slot="header" class="clearfix">
-                    <span>锻造池 <span style="color: rgb(144, 147, 153);">（前30）</span></span>
+                    <span>Forging pool <span style="color: rgb(144, 147, 153);">（前30）</span></span>
                 </div>
                 <el-table class="center"
                           v-loading="GeneratorsLoading"
@@ -22,7 +22,7 @@
                                     border
                                     style="width: 460px">
                                 <el-table-column
-                                        label="出租地址"
+                                        label="Rental address"
                                         width="280">
                                     <template slot-scope="scope">
                                         <router-link :to="'/account/'+scope.row.lessorRS">
@@ -31,7 +31,7 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column
-                                        label="出租数量">
+                                        label="Number of leases">
                                     <template slot-scope="scope">
                                         {{$g.wallet.amount(scope.row.guaranteedBalanceNQT)}}
                                     </template>
@@ -48,7 +48,7 @@
                     </el-table-column>
                     <el-table-column
                             prop="accountRS"
-                            label="账户地址"
+                            label="Account address"
                             width="280">
                         <template slot-scope="scope">
                             <router-link :to="'/account/'+scope.row.accountRS">
@@ -58,7 +58,7 @@
                     </el-table-column>
                     <el-table-column
                             prop="effectiveBalanceNXT"
-                            label="锻造数量"
+                            label="Forging quantity"
                             width="180">
                         <template slot-scope="scope">
                             <div v-if="scope.row.effectiveBalanceNXT">
@@ -71,11 +71,11 @@
                     </el-table-column>
                     <el-table-column
                             prop="sum"
-                            label="出租人数量"
+                            label="Number of lessors"
                             width="180">
                     </el-table-column>
                     <el-table-column
-                            label="出块时间"
+                            label="Block time"
                             width="180">
                         <template slot-scope="scope">
                             {{$g.wallet.formatDateTime(scope.row.hitTime*1000+($store.state.epochBeginning-500))}}
@@ -83,14 +83,14 @@
                     </el-table-column>
                     <el-table-column
                             prop="deadline"
-                            label="出块倒计时间">
+                            label="Countdown time">
                     </el-table-column>
                 </el-table>
             </el-card>
         </el-main>
         <el-footer class="footer">
             COPYRIGHT © 2018. ALL RIGHTS RESERVED. DESIGNED BY
-            <a target="_blank" href="https://hebeblock.com/">HEBEBLOCK</a>
+            <a target="_blank" href="https://hebeblock.com/">NUCLEARPLATFORM</a>
         </el-footer>
     </el-container>
 </template>
